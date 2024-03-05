@@ -1,45 +1,57 @@
+import 'package:darrebni_exam/ui/shared/colors.dart';
+import 'package:darrebni_exam/ui/shared/custom_widgets/custom_text.dart';
+import 'package:darrebni_exam/ui/shared/utils.dart';
+import 'package:darrebni_exam/ui/views/splash_view/splash_controller.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class SplashView extends StatefulWidget {
-  const SplashView({super.key});
-
+  SplashView({super.key});
+  SplashController contoller = Get.put(SplashController());
   @override
   State<SplashView> createState() => _SplashViewState();
 }
 
 class _SplashViewState extends State<SplashView> {
-  //!  Navigator.pushAndRemoveUntil =>  Get.offAll(page)
-  //* Navigator.push(context, route) =>  Get.to(page)
-  //? Navigator.pushReplacement(context, route) =>  Get.off(page)
-  //todo Navigator.pop(context) =>  Get.back()
-
-  @override
-  void initState() {
-    
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-      body: Stack(
-        children: [
-          Image.asset(
-            'assets/images/pngs/socialhub.png',
-            fit: BoxFit.fitWidth,
-            width: size.width,
+      body: Stack(children: [
+        Container(
+          width: double.infinity,
+          child: Image.asset(
+            'assets/images/pngs/mainbackground.png',
+            fit: BoxFit.cover,
           ),
-          /*Center(
-              child: Image.asset(
-            'assets/images/pngs/logo.png',
-            width: size.width / 1.5,
-            height: size.width / 1.5,
-          )), */
-        ],
-      ),
+        ),
+        Padding(
+          padding: EdgeInsetsDirectional.only(
+              top: screenWidth(1.5), start: screenWidth(3.9)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                width: screenWidth(2.18),
+                height: screenWidth(1.83),
+                child: Image.asset(
+                  'assets/images/pngs/logo.png',
+                ),
+              ),
+              CustomText(
+                text: "دربني للوطني",
+                styleType: TextStyleType.TITLE,
+                textColor: AppColors.logoColor,
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.only(top: screenWidth(8)),
+                child: Image.asset("assets/images/pngs/darrebni.png"),
+              ),
+            ],
+          ),
+        )
+      ]),
     ));
   }
 }

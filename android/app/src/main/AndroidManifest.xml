@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sp1_e_commerce">
+    package="com.example.darrebni_exam">
 
 
  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -9,7 +9,7 @@
     
    <application
    android:requestLegacyExternalStorage="true"
-        android:label="sp1_e_commerce"
+        android:label="darrebni_exam"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

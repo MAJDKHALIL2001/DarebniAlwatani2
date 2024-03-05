@@ -1,14 +1,12 @@
 import 'dart:convert';
 
+import 'package:darrebni_exam/core/data/network/moduls/token_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sp1_e_commerce/core/data/models/cart_model.dart';
-import 'package:sp1_e_commerce/core/data/models/post_model.dart';
-import 'package:sp1_e_commerce/core/data/models/product_info.dart';
-import 'package:sp1_e_commerce/core/data/models/token_info.dart';
-import 'package:sp1_e_commerce/core/enums/data_type.dart';
-import 'package:sp1_e_commerce/main.dart';
+
+import 'package:darrebni_exam/core/enums/data_type.dart';
+import 'package:darrebni_exam/main.dart';
 
 class SharedPrefrenceRepository {
   SharedPreferences pref = Get.find<SharedPreferences>();
@@ -20,6 +18,7 @@ class SharedPrefrenceRepository {
   String PREF_TOKEN_INFO = 'token_info';
   String PREF_APP_LANG = 'app_language';
   String PREF_CART_LIST = 'cart_list';
+  String PREF_COLLEGE_UUID = 'college_uuid';
 
   //* --- ----
 
@@ -32,6 +31,17 @@ class SharedPrefrenceRepository {
       return getPrefrnce(PREF_IS_LOGGED);
     else
       return false;
+  }
+
+  void setCollegeUuid(String value) {
+    setPrefrnce(type: DataType.STRING, key: PREF_COLLEGE_UUID, value: value);
+  }
+
+  String getCollegeUuid() {
+    if (pref.containsKey(PREF_COLLEGE_UUID))
+      return getPrefrnce(PREF_COLLEGE_UUID);
+    else
+      return '';
   }
 
   void setFirstLunch(bool value) {
@@ -67,8 +77,8 @@ class SharedPrefrenceRepository {
       return [];
   }
 
-  TokenInfo getTokenInfo() {
-    return TokenInfo.fromJson(jsonDecode(getPrefrnce(PREF_TOKEN_INFO)));
+  TokenModel getTokenInfo() {
+    return TokenModel.fromJson(jsonDecode(getPrefrnce(PREF_TOKEN_INFO)));
 
     //!--- get String from shared
     ////* getPrefrnce(PREF_TOKEN_INFO)
@@ -78,7 +88,7 @@ class SharedPrefrenceRepository {
     ////*TokenInfo.fromJson
   }
 
-  void setTokenInfo(TokenInfo info) {
+  void setTokenInfo(TokenModel info) {
     setPrefrnce(
         type: DataType.STRING,
         key: PREF_TOKEN_INFO,
@@ -100,22 +110,7 @@ class SharedPrefrenceRepository {
     if (pref.containsKey(PREF_APP_LANG)) {
       return getPrefrnce(PREF_APP_LANG);
     } else {
-      return 'en';
-    }
-  }
-
-  void setCartList(List<CartModel> list) {
-    setPrefrnce(
-        type: DataType.STRING,
-        key: PREF_CART_LIST,
-        value: CartModel.encode(list));
-  }
-
-  List<CartModel> getCartList() {
-    if (pref.containsKey(PREF_CART_LIST)) {
-      return CartModel.decode(getPrefrnce(PREF_CART_LIST));
-    } else {
-      return [];
+      return 'ar';
     }
   }
 

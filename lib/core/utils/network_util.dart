@@ -6,12 +6,11 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 
-import 'package:sp1_e_commerce/core/enums/request_type.dart';
+import 'package:darrebni_exam/core/enums/request_type.dart';
 import 'package:http_parser/http_parser.dart';
 
 class NetworkUtil {
-  static String baseUrl = 'fakestoreapi.com';
-  static String postBaseUrl = 'jsonplaceholder.typicode.com';
+  static String baseUrl = 'national.cliprz.org';
 
   static Future<dynamic> sendRequest({
     required RequestType type,
