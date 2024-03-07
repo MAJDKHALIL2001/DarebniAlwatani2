@@ -10,7 +10,6 @@ import 'package:darrebni_exam/app/my_app.dart';
 
 import 'package:darrebni_exam/core/data/repository/shared_prefrence_repository.dart';
 import 'package:darrebni_exam/core/services/connectivity_service.dart';
-import 'package:darrebni_exam/core/services/location_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +28,6 @@ Future<void> main() async {
   Get.put(ConnectivityService());
 //  Get.put(CartService());
   Get.put(Connectivity());
-  Get.put(LocationService());
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

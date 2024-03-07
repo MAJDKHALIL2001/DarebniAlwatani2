@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class SplashView extends StatefulWidget {
   SplashView({super.key});
-  SplashController contoller = Get.put(SplashController());
+  final SplashController contoller = Get.put(SplashController());
   @override
   State<SplashView> createState() => _SplashViewState();
 }

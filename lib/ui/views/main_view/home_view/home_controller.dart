@@ -3,19 +3,25 @@ import 'package:darrebni_exam/core/data/network/moduls/college_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/subject_model.dart';
 import 'package:darrebni_exam/core/data/repository/college_repository.dart';
 import 'package:darrebni_exam/core/data/repository/user_repository.dart';
-import 'package:darrebni_exam/ui/shared/colors.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
-import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeContorller extends GetxController {
   @override
   void onInit() {
-    getCollege();
-    getSpecialities();
+    if (isOnline) {
+      getCollege();
+      getSpecialities();
+      getSliderImage();
+    } else
+      BotToast.showText(text: 'انت غيرمتصل');
 
     super.onInit();
   }
+
+  TextEditingController searchController = TextEditingController();
+  RxList<String> listImage = <String>[].obs;
 
   List<String> images = ['info', 'Login', 'nurs'];
   RxInt index = 0.obs;
@@ -33,14 +39,7 @@ class HomeContorller extends GetxController {
   var listImageCarous = <String>['Arch', 'DR', 'It'].obs;
   RxSet<String> addedTypes = Set<String>().obs;
   late Rx<String?> specUuid = listSpecialities[0].uuid.obs;
-  // var listCollege = <String>[
-  //   "طب بشري",
-  //   " طب الاسنان",
-  //   "صيدلة ",
-  //   'تمريض',
-  //   "هندسة معلوماتية",
-  //   "هندسة معمارية"
-  // ].obs;
+
   var categoris = <String>[
     "هندسة البرمجيات ",
     "شبكات",
@@ -50,14 +49,12 @@ class HomeContorller extends GetxController {
     "ماستر",
     "تخرج",
   ].obs;
-  // var imageCollege = <String>[
-  //   "DR",
-  //   "Dentist",
-  //   "Pharmacy",
-  //   "Nurse",
-  //   "It",
-  //   "Arch",
-  // ].obs;
+  void filterCollegesByName() {
+    String searchText = searchController.text.toLowerCase();
+    filteredColleges.value = listCollege
+        .where((college) => college.name!.toLowerCase().contains(searchText))
+        .toList();
+  }
 
   void filterColleges() {
     if (selectedCategory.value == 'الكل') {
@@ -102,6 +99,18 @@ class HomeContorller extends GetxController {
 
       listSpecialities.clear();
       listSpecialities.addAll(r);
+    });
+  }
+
+  getSliderImage() async {
+    final result = await UserRepository().getSliderImage(position: 'home');
+    result.fold((l) {
+      BotToast.showText(text: l);
+    }, (r) {
+      // BotToast.showText(text: 'تم بنجاح');
+
+      listImage.clear();
+      listImage.addAll(r[0].url?.map((url) => url.toString()) ?? []);
     });
   }
 }

@@ -38,12 +38,16 @@ class _ResultViewState extends State<ResultView> {
               ? AppColors.blueColor
               : AppColors.mainColor,
         ),
-        CustomText(
-            text:
-                'عدد الاجابات الصحيحة:${widget.controller.correctAnswersCount.value} / ${widget.controller.questionList.length}'),
-        CustomText(
-            text:
-                'عدد الاجابات الخاطئة:${widget.controller.questionList.length - widget.controller.correctAnswersCount.value} / ${widget.controller.questionList.length}'),
+        Center(
+          child: CustomText(
+              text:
+                  'عدد الاجابات الصحيحة:${widget.controller.correctAnswersCount.value} / ${widget.controller.questionList.length}'),
+        ),
+        Center(
+          child: CustomText(
+              text:
+                  'عدد الاجابات الخاطئة:${widget.controller.questionList.length - widget.controller.correctAnswersCount.value} / ${widget.controller.questionList.length}'),
+        ),
         InkWell(
             onTap: () {
               widget.controller.showResult.value = true;
@@ -51,7 +55,10 @@ class _ResultViewState extends State<ResultView> {
               ;
             },
             child: Padding(
-              padding: EdgeInsetsDirectional.only(top: screenWidth(30)),
+              padding: EdgeInsetsDirectional.only(
+                  top: screenWidth(30),
+                  start: screenWidth(10),
+                  end: screenWidth(10)),
               child: CustomBotton(
                 text: 'التحقق من الاجابات',
                 color: widget.kind == 'ماستر'

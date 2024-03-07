@@ -9,6 +9,6 @@ class SplashController extends GetxController {
   }
 
   void reload() {
-    Future.delayed(Duration(seconds: 8)).then((value) => Get.off(LoginView()));
+    Future.delayed(Duration(seconds: 4)).then((value) => Get.off(LoginView()));
   }
 }

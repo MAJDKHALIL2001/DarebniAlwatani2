@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:darrebni_exam/core/data/repository/shared_prefrence_repository.dart';
 import 'package:darrebni_exam/core/services/connectivity_service.dart';
-import 'package:darrebni_exam/core/services/location_service.dart';
 import 'package:darrebni_exam/ui/shared/colors.dart';
 
 void customLoader() => BotToast.showCustomLoading(toastBuilder: (context) {
@@ -25,6 +24,11 @@ void customLoader() => BotToast.showCustomLoading(toastBuilder: (context) {
         ),
       );
     });
+bool isValidEntryCode(String code) {
+  final RegExp pattern = RegExp(r'^.{6}$');
+  return pattern.hasMatch(code);
+}
+
 bool isTenDigits(String input) {
   return RegExp(r'^09\d{8}$').hasMatch(input);
 }
@@ -72,5 +76,4 @@ SharedPrefrenceRepository get storege => Get.find<SharedPrefrenceRepository>();
 ConnectivityService get connectivityService => Get.find<ConnectivityService>();
 Connectivity get connectivity => Get.find<Connectivity>();
 
-LocationService get locationService => Get.find<LocationService>();
 bool isOnline = false;

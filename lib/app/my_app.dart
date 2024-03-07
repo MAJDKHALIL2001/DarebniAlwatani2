@@ -16,7 +16,7 @@ import 'package:darrebni_exam/ui/views/splash_view/splash_view.dart';
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-  MyAppController controller = Get.put(MyAppController());
+  final MyAppController controller = Get.put(MyAppController());
 
   @override
   Widget build(BuildContext context) {

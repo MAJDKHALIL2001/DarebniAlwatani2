@@ -1,6 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/core/data/network/moduls/question_model.dart';
 import 'package:darrebni_exam/core/data/repository/exam_repository.dart';
+import 'package:darrebni_exam/core/data/repository/user_repository.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
 import 'package:get/get.dart';
 
@@ -15,16 +16,15 @@ class QuestionController extends GetxController {
       getQuestionByExam();
     }
     updateQuestionText();
-
+    // updateIsFavorit();
     super.onInit();
   }
 
   // Map<String, int> selectedAnswers = {};
   RxMap<String, int> selectedAnswers = RxMap<String, int>.from({});
   RxList<bool> answerSelectionStatus = RxList<bool>.filled(200, false);
-  RxBool isFavorit = false.obs;
-  // RxBool isCorrect = false.obs;
-  RxBool isChoice = false.obs;
+  RxBool? isFavorit = false.obs; // RxBool isCorrect = false.obs;
+  // RxBool isChoice = false.obs;
   RxString questionText = ''.obs;
 
   RxInt selectedAnswerIndex = (-1).obs;
@@ -34,6 +34,7 @@ class QuestionController extends GetxController {
   late String? subjUuid;
   late String? examUuid;
   late String? type;
+
   RxList<QuestionModel> questionList = <QuestionModel>[].obs;
 
   RxDouble progressPercent = 0.0.obs;
@@ -44,6 +45,11 @@ class QuestionController extends GetxController {
       this.subjUuid}) {
     progressPercent.value = (50 - counter.value) / 50;
   }
+  // updateIsFavorit() {
+  //   if (questionList.isNotEmpty && counter.value > 0) {
+  //     isFavorit!.value = questionList[counter.value - 1].favorite == 1;
+  //   }
+  // }
 
   void incrementCounter() {
     if (counter.value < questionList.length) {
@@ -100,15 +106,6 @@ class QuestionController extends GetxController {
     });
   }
 
-  // void onAnswerSelected(int index) {
-  //   selectedAnswerIndex.value = index;
-  // }
-  // void onAnswerSelected(int index) {
-  //   selectedAnswerIndex.value = index;
-  //   if (questionList[counter.value - 1].questionText != null) {
-  //     selectedAnswers[questionList[counter.value - 1].questionText!] = index;
-  //   } else {}
-  // }
   void updateQuestionText() {
     questionText.value = questionList.isNotEmpty && counter.value > 0
         ? questionList[counter.value - 1].questionText ?? 'Default text'
@@ -130,32 +127,15 @@ class QuestionController extends GetxController {
       }
     }
   }
-  // void onAnswerSelected(int index) {
-  //   if (!selectedAnswers.containsKey(questionText.value)) {
-  //     // إذا لم يكن المفتاح موجودًا، قم بإنشاء قائمة جديدة وتعيينها للمفتاح
-  //     selectedAnswers[questionText.value] = [index];
-  //   } else {
-  //     // إذا كان المفتاح موجودًا، قم بالتحقق مما إذا كان القيمة موجودة في القائمة
-  //     if (selectedAnswers[questionText.value]!.contains(index)) {
-  //       // إذا كان القيمة موجودة، قم بإزالتها من القائمة
-  //       selectedAnswers[questionText.value]!.remove(index);
-  //     } else {
-  //       // إذا لم تكن القيمة موجودة، قم بإضافتها إلى القائمة
-  //       selectedAnswers[questionText.value]!.add(index);
-  //     }
-  //   }
-  //   selectedAnswers.update(questionText.value, (value) => value);
-  // }
-  //   selectedAnswerIndex.value = index;
-  //   if (questionList[counter.value - 1].questionText != null) {
-  //     // تخزين معلومات إضافية مع index
-  //     // هنا يمكنك تعديل القيمة التي تريد تخزينها
-  //     // على سبيل المثال، يمكنك تخزين كائن يحتوي على معلومات إضافية
-  //     selectedAnswers[questionList[counter.value - 1].questionText!] = {
-  //       'index': index,
-  //       // إضافة معلومات إضافية هنا
-  //     };
-  //   } else {
-  //     // تعامل مع الحالة التي يكون فيها questionText غير موجود
-  //   }
+
+  addFavoritQuestion({required String question}) async {
+    final result = await UserRepository().addFavoritQuestion(
+      question: '${question}',
+    );
+    result.fold((l) {
+      BotToast.showText(text: l);
+    }, (r) {
+      BotToast.showText(text: r);
+    });
+  }
 }

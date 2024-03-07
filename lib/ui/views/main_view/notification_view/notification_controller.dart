@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/core/data/repository/user_repository.dart';
+import 'package:darrebni_exam/ui/shared/utils.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/data/network/moduls/notification_model.dart';
@@ -7,7 +8,7 @@ import '../../../../core/data/network/moduls/notification_model.dart';
 class NotificationController extends GetxController {
   @override
   void onInit() {
-    getNotification();
+    isOnline ? getNotification() : BotToast.showText(text: 'انت غير متصل');
     super.onInit();
   }
 

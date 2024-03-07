@@ -40,12 +40,12 @@ class CustomCarous extends StatelessWidget {
           .map((item) => Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: AppColors.blueColor,
+                // color: AppColors.blueColor,
               ),
               width: width,
               child: Center(
-                child: Image.asset(
-                  "assets/images/pngs/${item}.png",
+                child: Image.network(
+                  "{$item}",
                   fit: BoxFit.fill,
                   width: double.infinity,
                 ),

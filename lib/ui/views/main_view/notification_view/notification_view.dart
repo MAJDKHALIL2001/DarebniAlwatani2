@@ -14,44 +14,52 @@ class NotificationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      TitleWiget(svg: "ic_vector", text: "الإشعارات"),
-      Obx(
-        () => ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: controller.listNotification.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Padding(
-              padding: EdgeInsets.all(screenWidth(30)),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: index % 2 == 0
-                      ? AppColors.mainColorLowOp
-                      : AppColors.blueColorLowOp,
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(screenWidth(40)),
-                  child: Column(
-                    children: [
-                      CustomText(
-                          text:
-                              "   ${controller.listNotification[index].title}",
-                          textColor: AppColors.blackColor,
-                          styleType: TextStyleType.SUBTITLE),
-                      CustomText(
-                          text: "   ${controller.listNotification[index].body}",
-                          textColor: AppColors.blackColor,
-                          styleType: TextStyleType.SUBTITLE),
-                    ],
+    return Scaffold(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          controller.onInit();
+        },
+        child: ListView(children: [
+          TitleWiget(svg: "ic_vector", text: "الإشعارات"),
+          Obx(
+            () => ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: controller.listNotification.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: EdgeInsets.all(screenWidth(30)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: index % 2 == 0
+                          ? AppColors.mainColorLowOp
+                          : AppColors.blueColorLowOp,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(screenWidth(40)),
+                      child: Column(
+                        children: [
+                          CustomText(
+                              text:
+                                  "   ${controller.listNotification[index].title}",
+                              textColor: AppColors.blackColor,
+                              styleType: TextStyleType.SUBTITLE),
+                          CustomText(
+                              text:
+                                  "   ${controller.listNotification[index].body}",
+                              textColor: AppColors.blackColor,
+                              styleType: TextStyleType.SUBTITLE),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            );
-          },
-        ),
-      )
-    ]);
+                );
+              },
+            ),
+          )
+        ]),
+      ),
+    );
   }
 }

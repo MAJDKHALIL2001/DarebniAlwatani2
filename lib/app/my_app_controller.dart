@@ -1,7 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:get/get.dart';
 import 'package:darrebni_exam/core/services/connectivity_service.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
+import 'package:get/get.dart';
 
 class MyAppController extends GetxController {
   @override

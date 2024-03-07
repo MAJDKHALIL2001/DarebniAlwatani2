@@ -1,8 +1,10 @@
+import 'package:darrebni_exam/core/data/network/moduls/answer_import_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/college_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/common_response.dart';
 import 'package:darrebni_exam/core/data/network/moduls/import_question_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/notification_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/question_model.dart';
+import 'package:darrebni_exam/core/data/network/moduls/slider_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/token_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/user_model.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
@@ -81,6 +83,7 @@ class UserRepository {
     try {
       return NetworkUtil.sendRequest(
         type: RequestType.GET,
+        params: {'college_uuid': '${storege.getCollegeUuid()}'},
         route: 'api/user/logout',
         headers:
             NetworkConfig.getHeaders(type: RequestType.POST, needAuth: true),
@@ -105,11 +108,13 @@ class UserRepository {
     try {
       return NetworkUtil.sendRequest(
           type: RequestType.POST,
-          route: 'user/updateFcmToken',
+          route: 'api/user/device/store',
+          params: {'college_uuid': '${storege.getCollegeUuid()}'},
           body: {
-            "token": fcmToken,
+            "device_token": '${fcmToken}',
           },
           headers: NetworkConfig.getHeaders(
+            needAuth: true,
             type: RequestType.POST,
           )).then((value) {
         CommonResponse<Map<String, dynamic>> commonResponse =
@@ -181,7 +186,7 @@ class UserRepository {
     }
   }
 
-  Future<Either<String, List<QuestionModel>>> showImortantQuestion(
+  Future<Either<String, AnswerImportModel>> showImortantQuestion(
       {required String queUuid}) async {
     try {
       return NetworkUtil.sendRequest(
@@ -194,18 +199,18 @@ class UserRepository {
         headers:
             NetworkConfig.getHeaders(type: RequestType.GET, needAuth: true),
       ).then((value) {
-        CommonResponse<List<dynamic>> commonResponse =
+        CommonResponse<Map<String, dynamic>> commonResponse =
             CommonResponse.fromJson(value);
         if (commonResponse.getStatus) {
-          List<QuestionModel> result = [];
+          // List<AnswerImportModel> result = [];
 
-          commonResponse.data!.forEach(
-            (element) {
-              result.add(QuestionModel.fromJson(element));
-            },
-          );
+          // commonResponse.data?.forEach(
+          //   (element) {
+          //     result.add(AnswerImportModel.fromJson(element));
+          //   },
+          // );
 
-          return Right(result);
+          return Right(AnswerImportModel.fromJson(commonResponse.data ?? {}));
         } else {
           return Left(commonResponse.message);
         }
@@ -297,6 +302,92 @@ class UserRepository {
 
         if (commonResponse.getStatus) {
           return Right('تم ارسال تعليقك بنجاح');
+        } else {
+          return Left(commonResponse.message);
+        }
+      });
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, String>> addFavoritQuestion(
+      {required String question}) async {
+    try {
+      return NetworkUtil.sendRequest(
+        type: RequestType.GET,
+        params: {
+          'college_uuid': '${storege.getCollegeUuid()}',
+          'question': question
+        },
+        route: 'api/user/add-favorite',
+        headers:
+            NetworkConfig.getHeaders(type: RequestType.GET, needAuth: true),
+      ).then((value) {
+        CommonResponse<Map<String, dynamic>> commonResponse =
+            CommonResponse.fromJson(value);
+
+        if (commonResponse.getStatus) {
+          return Right('تم اضافة السؤال  للمفضلة');
+        } else {
+          return Left(commonResponse.message);
+        }
+      });
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, String>> deleteFavoritQuestion(
+      {required String uuid}) async {
+    try {
+      return NetworkUtil.sendRequest(
+        type: RequestType.GET,
+        params: {'college_uuid': '${storege.getCollegeUuid()}', 'uuid': uuid},
+        route: 'api/user/delete-favorite',
+        headers:
+            NetworkConfig.getHeaders(type: RequestType.GET, needAuth: true),
+      ).then((value) {
+        CommonResponse<Map<String, dynamic>> commonResponse =
+            CommonResponse.fromJson(value);
+
+        if (commonResponse.getStatus) {
+          return Right('تم حذف السؤال  من المفضلة');
+        } else {
+          return Left(commonResponse.message);
+        }
+      });
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  Future<Either<String, List<SliderModel>>> getSliderImage(
+      {required String position}) async {
+    try {
+      return NetworkUtil.sendRequest(
+          type: RequestType.GET,
+          route: 'api/sliders',
+          params: {
+            'college_uuid': '${storege.getCollegeUuid()}',
+            'position': '${position}'
+          },
+          headers: NetworkConfig.getHeaders(
+            type: RequestType.GET,
+            needAuth: false,
+          )).then((value) {
+        CommonResponse<List<dynamic>> commonResponse =
+            CommonResponse.fromJson(value);
+        if (commonResponse.getStatus) {
+          List<SliderModel> result = [];
+
+          commonResponse.data!.forEach(
+            (element) {
+              result.add(SliderModel.fromJson(element));
+            },
+          );
+
+          return Right(result);
         } else {
           return Left(commonResponse.message);
         }

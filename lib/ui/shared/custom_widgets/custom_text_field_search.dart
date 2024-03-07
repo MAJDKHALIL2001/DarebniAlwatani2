@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 class CustomSearch extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
-  const CustomSearch({super.key, this.controller, this.validator});
+  final String? Function(String?)? onChanged;
+
+  const CustomSearch(
+      {super.key, this.controller, this.validator, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      onChanged: onChanged,
       validator: validator,
       textAlign: TextAlign.right,
       style: TextStyle(
