@@ -3,7 +3,6 @@ import 'package:darrebni_exam/ui/shared/custom_widgets/custom_text.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
 import 'package:darrebni_exam/ui/views/splash_view/splash_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class SplashView extends StatefulWidget {

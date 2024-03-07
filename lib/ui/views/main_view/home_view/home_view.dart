@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/ui/shared/colors.dart';
 import 'package:darrebni_exam/ui/shared/custom_widgets/custom_botton.dart';
 import 'package:darrebni_exam/ui/shared/custom_widgets/custom_carouse.dart';
@@ -200,192 +201,202 @@ class _HomeViewState extends State<HomeView> {
                                           ],
                                         )),
                                       ))
-                                    : Get.dialog(AlertDialog(
-                                        content: SingleChildScrollView(
-                                            child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            CustomText(
-                                                text:
-                                                    "الرجاء تحديد الاختصاص ونوع الفحص",
+                                    : {
+                                        controller.getSpecialities(),
+                                        Get.dialog(AlertDialog(
+                                          content: SingleChildScrollView(
+                                              child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              CustomText(
+                                                  text:
+                                                      "الرجاء تحديد الاختصاص ونوع الفحص",
+                                                  textColor:
+                                                      AppColors.blackColor,
+                                                  styleType:
+                                                      TextStyleType.SUBTITLE),
+                                              CustomText(
+                                                text: "الاختصاص",
                                                 textColor: AppColors.blackColor,
-                                                styleType:
-                                                    TextStyleType.SUBTITLE),
-                                            CustomText(
-                                              text: "الاختصاص",
-                                              textColor: AppColors.blackColor,
-                                            ),
-                                            Obx(
-                                              () =>
-                                                  controller.listSpecialities
-                                                              .length ==
-                                                          0
-                                                      ? SpinKitCircle(
-                                                          color: AppColors
-                                                              .mainColor,
-                                                        )
-                                                      : SingleChildScrollView(
-                                                          scrollDirection:
-                                                              Axis.horizontal,
-                                                          child: Row(
-                                                            children: controller
-                                                                .listSpecialities
-                                                                .map(
-                                                                    (category) {
-                                                              return Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        8.0),
-                                                                child: InkWell(
-                                                                  onTap: () {
-                                                                    controller
-                                                                            .selectedSpecialities
-                                                                            .value =
-                                                                        category
-                                                                            .name!;
-                                                                    controller
-                                                                            .specUuid
-                                                                            .value =
-                                                                        category
-                                                                            .uuid!;
-                                                                  },
+                                              ),
+                                              Obx(
+                                                () =>
+                                                    controller.listSpecialities
+                                                                .length ==
+                                                            0
+                                                        ? SpinKitCircle(
+                                                            color: AppColors
+                                                                .mainColor,
+                                                          )
+                                                        : SingleChildScrollView(
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                            child: Row(
+                                                              children: controller
+                                                                  .listSpecialities
+                                                                  .map(
+                                                                      (category) {
+                                                                return Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
                                                                   child:
-                                                                      Container(
-                                                                    decoration: BoxDecoration(
-                                                                        color: category.name == controller.selectedSpecialities.value
-                                                                            ? AppColors
-                                                                                .mainColor
-                                                                            : AppColors
-                                                                                .whiteColor,
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(
-                                                                                10),
-                                                                        border: Border.all(
-                                                                            width:
-                                                                                1,
-                                                                            color:
-                                                                                AppColors.mainColor)),
+                                                                      InkWell(
+                                                                    onTap: () {
+                                                                      controller
+                                                                              .selectedSpecialities
+                                                                              .value =
+                                                                          category
+                                                                              .name!;
+                                                                      controller
+                                                                              .specUuid
+                                                                              .value =
+                                                                          category
+                                                                              .uuid!;
+                                                                    },
                                                                     child:
-                                                                        Padding(
-                                                                      padding: EdgeInsets.all(
-                                                                          screenWidth(
-                                                                              30)),
+                                                                        Container(
+                                                                      decoration: BoxDecoration(
+                                                                          color: category.name == controller.selectedSpecialities.value
+                                                                              ? AppColors
+                                                                                  .mainColor
+                                                                              : AppColors
+                                                                                  .whiteColor,
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              10),
+                                                                          border: Border.all(
+                                                                              width: 1,
+                                                                              color: AppColors.mainColor)),
                                                                       child:
-                                                                          CustomText(
-                                                                        text: category
-                                                                            .name,
-                                                                        textColor: category.name ==
-                                                                                controller.selectedSpecialities.value
-                                                                            ? AppColors.whiteColor
-                                                                            : AppColors.mainColor,
-                                                                        styleType:
-                                                                            TextStyleType.BODY,
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.all(screenWidth(30)),
+                                                                        child:
+                                                                            CustomText(
+                                                                          text:
+                                                                              category.name,
+                                                                          textColor: category.name == controller.selectedSpecialities.value
+                                                                              ? AppColors.whiteColor
+                                                                              : AppColors.mainColor,
+                                                                          styleType:
+                                                                              TextStyleType.BODY,
+                                                                        ),
                                                                       ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              );
-                                                            }).toList(),
+                                                                );
+                                                              }).toList(),
+                                                            ),
                                                           ),
-                                                        ),
-                                            ),
-                                            CustomText(
-                                              text: "النوع",
-                                              textColor: AppColors.blackColor,
-                                            ),
-                                            Obx(
-                                              () => SingleChildScrollView(
-                                                scrollDirection:
-                                                    Axis.horizontal,
-                                                child: Row(
-                                                  children: controller.kind
-                                                      .map((category) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              8.0),
-                                                      child: InkWell(
-                                                        onTap: () {
-                                                          controller
-                                                              .selectedKind
-                                                              .value = category;
-                                                        },
-                                                        child: Container(
-                                                          decoration: BoxDecoration(
-                                                              color: category ==
-                                                                      controller
-                                                                          .selectedKind
-                                                                          .value
-                                                                  ? AppColors
-                                                                      .mainColor
-                                                                  : AppColors
-                                                                      .whiteColor,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              border: Border.all(
-                                                                  width: 1,
-                                                                  color: AppColors
-                                                                      .mainColor)),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsets.all(
-                                                                    screenWidth(
-                                                                        30)),
-                                                            child: CustomText(
-                                                              text: category,
-                                                              textColor: category ==
-                                                                      controller
-                                                                          .selectedKind
-                                                                          .value
-                                                                  ? AppColors
-                                                                      .whiteColor
-                                                                  : AppColors
-                                                                      .mainColor,
-                                                              styleType:
-                                                                  TextStyleType
-                                                                      .BODY,
+                                              ),
+                                              CustomText(
+                                                text: "النوع",
+                                                textColor: AppColors.blackColor,
+                                              ),
+                                              Obx(
+                                                () => SingleChildScrollView(
+                                                  scrollDirection:
+                                                      Axis.horizontal,
+                                                  child: Row(
+                                                    children: controller.kind
+                                                        .map((category) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: InkWell(
+                                                          onTap: () {
+                                                            controller
+                                                                    .selectedKind
+                                                                    .value =
+                                                                category;
+                                                          },
+                                                          child: Container(
+                                                            decoration: BoxDecoration(
+                                                                color: category ==
+                                                                        controller
+                                                                            .selectedKind
+                                                                            .value
+                                                                    ? AppColors
+                                                                        .mainColor
+                                                                    : AppColors
+                                                                        .whiteColor,
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                border: Border.all(
+                                                                    width: 1,
+                                                                    color: AppColors
+                                                                        .mainColor)),
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsets.all(
+                                                                      screenWidth(
+                                                                          30)),
+                                                              child: CustomText(
+                                                                text: category,
+                                                                textColor: category ==
+                                                                        controller
+                                                                            .selectedKind
+                                                                            .value
+                                                                    ? AppColors
+                                                                        .whiteColor
+                                                                    : AppColors
+                                                                        .mainColor,
+                                                                styleType:
+                                                                    TextStyleType
+                                                                        .BODY,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ),
-                                                    );
-                                                  }).toList(),
+                                                      );
+                                                    }).toList(),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  EdgeInsetsDirectional.only(
-                                                      top: screenWidth(20)),
-                                              child: InkWell(
-                                                  onTap: () {
-                                                    Get.off(CollageView(
-                                                        speUuid: controller
-                                                            .specUuid.value!,
-                                                        collegeName: controller
-                                                                .listCollege[
-                                                                    index]
-                                                                .name ??
-                                                            '',
-                                                        kind: controller
-                                                            .selectedKind
-                                                            .value));
-                                                  },
-                                                  child: controller
-                                                              .listSpecialities
-                                                              .length ==
-                                                          0
-                                                      ? SizedBox()
-                                                      : CustomBotton(
-                                                          text: "حفظ")),
-                                            ),
-                                          ],
-                                        )),
-                                      ));
+                                              Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.only(
+                                                        top: screenWidth(20)),
+                                                child: InkWell(
+                                                    onTap: () {
+                                                      isOnline
+                                                          ? {
+                                                              Get.off(CollageView(
+                                                                  speUuid: controller
+                                                                      .specUuid
+                                                                      .value!,
+                                                                  collegeName: controller
+                                                                          .listCollege[
+                                                                              index]
+                                                                          .name ??
+                                                                      '',
+                                                                  kind: controller
+                                                                      .selectedKind
+                                                                      .value))
+                                                            }
+                                                          : BotToast.showText(
+                                                              text:
+                                                                  'انت غير متصل');
+                                                    },
+                                                    child: Obx(
+                                                      () => controller
+                                                                  .listSpecialities
+                                                                  .length ==
+                                                              0
+                                                          ? SizedBox()
+                                                          : CustomBotton(
+                                                              text: "حفظ"),
+                                                    )),
+                                              ),
+                                            ],
+                                          )),
+                                        ))
+                                      };
                               },
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,

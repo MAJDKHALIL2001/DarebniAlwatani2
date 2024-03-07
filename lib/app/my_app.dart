@@ -1,5 +1,4 @@
 import 'package:bot_toast/bot_toast.dart';
-import 'package:darrebni_exam/ui/views/login_view/login_view.dart';
 import 'package:darrebni_exam/ui/views/main_view/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
 
-        home: storege.getFirstLunch() ? SplashView() : SplashView(),
+        home: storege.getFirstLunch() ? SplashView() : MainView(),
       ),
     );
   }

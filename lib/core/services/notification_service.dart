@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/core/data/repository/user_repository.dart';
-import 'package:darrebni_exam/ui/shared/custom_widgets/custom_toast.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 

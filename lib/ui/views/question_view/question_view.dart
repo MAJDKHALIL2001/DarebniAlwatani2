@@ -179,30 +179,38 @@ class QuestionView extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    controller
-                                                .questionList[
-                                                    controller.counter.value -
-                                                        1]
-                                                .favorite ==
-                                            0
+                                    isOnline
                                         ? {
-                                            controller.addFavoritQuestion(
-                                                question: controller
-                                                    .questionList[controller
-                                                            .counter.value -
-                                                        1]
-                                                    .question
-                                                    .toString()),
                                             controller
-                                                .questionList[
-                                                    controller.counter.value -
-                                                        1]
-                                                .favorite = 1,
-                                            controller.isFavorit!.value = true,
+                                                        .questionList[controller
+                                                                .counter.value -
+                                                            1]
+                                                        .favorite ==
+                                                    0
+                                                ? {
+                                                    controller.addFavoritQuestion(
+                                                        question: controller
+                                                            .questionList[
+                                                                controller
+                                                                        .counter
+                                                                        .value -
+                                                                    1]
+                                                            .question
+                                                            .toString()),
+                                                    controller
+                                                        .questionList[controller
+                                                                .counter.value -
+                                                            1]
+                                                        .favorite = 1,
+                                                    controller.isFavorit!
+                                                        .value = true,
+                                                  }
+                                                : BotToast.showText(
+                                                    text:
+                                                        'السؤال موجود بالمفضلة مسبقا')
                                           }
                                         : BotToast.showText(
-                                            text:
-                                                'السؤال موجود بالمفضلة مسبقا');
+                                            text: 'انت غير متصل');
                                   },
                                   child: controller.isFavorit!.value
                                       ? Icon(

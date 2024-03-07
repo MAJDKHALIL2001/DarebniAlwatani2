@@ -1,6 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:darrebni_exam/ui/views/collage_view/collage_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
@@ -36,16 +35,6 @@ bool isTenDigits(String input) {
 bool isUsernameValid(String username) {
   return RegExp(r'^[a-zA-Z\s]+$').hasMatch(username);
 }
-// bool isEmailValid(String email) {
-//   return RegExp(
-//           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-//       .hasMatch(email);
-// }
-
-// bool isValidPassword(String password) {
-//   return RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-//       .hasMatch(password);
-// }
 
 Future<XFile?> chooseImage(ImageSource imageSource) async {
   return await ImagePicker().pickImage(source: imageSource);

@@ -1,7 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/core/data/repository/user_repository.dart';
-import 'package:darrebni_exam/core/services/connectivity_service.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
+import 'package:darrebni_exam/ui/views/main_view/main_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,19 +12,8 @@ class LoginController extends GetxController {
   RxBool isLoading = false.obs;
   @override
   void onInit() {
-    // connectivityService.connectivityStatusController.stream.listen((event) {
-    //   isOnline = event == ConnectivityStatus.ONLINE;
-    // });
     super.onInit();
   }
-
-  // RxBool isOnline = true.obs;
-
-  // void checkConnection() {
-  //   connectivityService.connectivityStatusController.stream.listen((event) {
-  //     // isOnline.value = event == ConnectivityStatus.ONLINE;
-  //   });
-  // }
 
   void Login({
     required String code,
@@ -38,6 +27,8 @@ class LoginController extends GetxController {
       BotToast.showText(text: "تم تسجيل الدخول بنجاح");
       storege.setTokenInfo(r);
       isLoading.value = false;
+      storege.setFirstLunch(false);
+      Get.off(MainView());
 
       return (r);
     });

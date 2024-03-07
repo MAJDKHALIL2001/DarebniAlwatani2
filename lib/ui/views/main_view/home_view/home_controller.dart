@@ -12,7 +12,7 @@ class HomeContorller extends GetxController {
   void onInit() {
     if (isOnline) {
       getCollege();
-      getSpecialities();
+      // getSpecialities();
       getSliderImage();
     } else
       BotToast.showText(text: 'انت غيرمتصل');

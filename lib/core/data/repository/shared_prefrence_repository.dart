@@ -2,11 +2,9 @@ import 'dart:convert';
 
 import 'package:darrebni_exam/core/data/network/moduls/token_model.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:darrebni_exam/core/enums/data_type.dart';
-import 'package:darrebni_exam/main.dart';
 
 class SharedPrefrenceRepository {
   SharedPreferences pref = Get.find<SharedPreferences>();

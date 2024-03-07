@@ -1,12 +1,13 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/core/data/network/moduls/exam_model.dart';
 import 'package:darrebni_exam/core/data/repository/exam_repository.dart';
+import 'package:darrebni_exam/ui/shared/utils.dart';
 import 'package:get/get.dart';
 
 class ExamCourcesController extends GetxController {
   @override
   void onInit() {
-    getExameName();
+    isOnline ? getExameName() : BotToast.showText(text: 'انت غير متصل');
     super.onInit();
   }
 

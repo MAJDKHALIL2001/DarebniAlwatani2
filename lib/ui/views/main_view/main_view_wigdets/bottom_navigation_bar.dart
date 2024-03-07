@@ -1,7 +1,5 @@
-import 'package:darrebni_exam/ui/shared/colors.dart';
 import 'package:darrebni_exam/ui/views/main_view/main_view_wigdets/nav_item.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 enum BottomNavigationEnum {
   HOME,
@@ -51,4 +49,3 @@ class CustomNavigationBar extends StatelessWidget {
     );
   }
 }
-

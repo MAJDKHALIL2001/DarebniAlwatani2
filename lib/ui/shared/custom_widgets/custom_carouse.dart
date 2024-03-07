@@ -1,6 +1,4 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:darrebni_exam/ui/shared/colors.dart';
-import 'package:darrebni_exam/ui/shared/utils.dart';
 import 'package:flutter/material.dart';
 
 class CustomCarous extends StatelessWidget {

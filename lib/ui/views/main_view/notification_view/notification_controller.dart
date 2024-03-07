@@ -8,7 +8,13 @@ import '../../../../core/data/network/moduls/notification_model.dart';
 class NotificationController extends GetxController {
   @override
   void onInit() {
-    isOnline ? getNotification() : BotToast.showText(text: 'انت غير متصل');
+    storege.getFirstLunch()
+        ? null
+        : {
+            isOnline
+                ? getNotification()
+                : BotToast.showText(text: 'انت غير متصل')
+          };
     super.onInit();
   }
 

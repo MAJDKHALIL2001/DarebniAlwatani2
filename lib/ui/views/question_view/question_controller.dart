@@ -2,7 +2,6 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/core/data/network/moduls/question_model.dart';
 import 'package:darrebni_exam/core/data/repository/exam_repository.dart';
 import 'package:darrebni_exam/core/data/repository/user_repository.dart';
-import 'package:darrebni_exam/ui/shared/utils.dart';
 import 'package:get/get.dart';
 
 class QuestionController extends GetxController {

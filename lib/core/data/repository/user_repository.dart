@@ -1,9 +1,7 @@
 import 'package:darrebni_exam/core/data/network/moduls/answer_import_model.dart';
-import 'package:darrebni_exam/core/data/network/moduls/college_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/common_response.dart';
 import 'package:darrebni_exam/core/data/network/moduls/import_question_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/notification_model.dart';
-import 'package:darrebni_exam/core/data/network/moduls/question_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/slider_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/token_model.dart';
 import 'package:darrebni_exam/core/data/network/moduls/user_model.dart';
@@ -13,8 +11,6 @@ import 'package:dartz/dartz.dart';
 import 'package:darrebni_exam/core/data/network/network_config.dart';
 import 'package:darrebni_exam/core/enums/request_type.dart';
 import 'package:darrebni_exam/core/utils/network_util.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class UserRepository {
   Future<Either<String, String>> sinUp({

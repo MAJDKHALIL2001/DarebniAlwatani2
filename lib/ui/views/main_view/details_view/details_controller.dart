@@ -1,4 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:darrebni_exam/core/data/network/moduls/token_model.dart';
+import 'package:darrebni_exam/ui/shared/utils.dart';
+import 'package:darrebni_exam/ui/views/login_view/login_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +20,10 @@ class DetailsController extends GetxController {
     }, (r) {
       BotToast.showText(text: r);
       isLoadingLogout.value = false;
+      storege.setTokenInfo(TokenModel());
+      storege.setFirstLunch(true);
+      storege.setCollegeUuid('');
+      Get.off(() => LoginView());
 
       return (r);
     });
@@ -26,6 +33,7 @@ class DetailsController extends GetxController {
     final result = await UserRepository().addSuggestion(text: text);
     result.fold((l) {
       BotToast.showText(text: l);
+
       isLoading.value = false;
     }, (r) {
       BotToast.showText(text: r);

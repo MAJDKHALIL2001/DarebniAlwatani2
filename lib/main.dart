@@ -1,7 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:darrebni_exam/core/services/notification_service.dart';
 import 'package:darrebni_exam/firebase_options.dart';
-import 'package:darrebni_exam/ui/views/collage_view/collage_controller.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

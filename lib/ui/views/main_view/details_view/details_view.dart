@@ -1,15 +1,12 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/ui/shared/colors.dart';
 import 'package:darrebni_exam/ui/shared/custom_widgets/custom_botton.dart';
-import 'package:darrebni_exam/ui/shared/custom_widgets/custom_text.dart';
-import 'package:darrebni_exam/ui/shared/custom_widgets/custom_text_field.dart';
 import 'package:darrebni_exam/ui/shared/shared_widgets/custom_container.dart';
 import 'package:darrebni_exam/ui/shared/shared_widgets/title_widget.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
 import 'package:darrebni_exam/ui/views/about_us/about_us_view.dart';
 import 'package:darrebni_exam/ui/views/edit_person_view/edit_person_view.dart';
 import 'package:darrebni_exam/ui/views/main_view/details_view/details_controller.dart';
-import 'package:darrebni_exam/ui/views/splash_view/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';

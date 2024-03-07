@@ -1,9 +1,9 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:darrebni_exam/ui/shared/colors.dart';
 import 'package:darrebni_exam/ui/shared/custom_widgets/custom_botton.dart';
 import 'package:darrebni_exam/ui/shared/custom_widgets/custom_carouse.dart';
 import 'package:darrebni_exam/ui/shared/custom_widgets/custom_dots.dart';
 import 'package:darrebni_exam/ui/shared/custom_widgets/custom_text.dart';
-import 'package:darrebni_exam/ui/shared/custom_widgets/custom_text_field_search.dart';
 import 'package:darrebni_exam/ui/shared/shared_widgets/custom_container.dart';
 import 'package:darrebni_exam/ui/shared/shared_widgets/title_widget.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
@@ -86,9 +86,6 @@ class CollageView extends StatelessWidget {
                             controller.listSubject.length,
                             (index) => InkWell(
                                 onTap: () {
-                                  // controller.subjUuid.value =
-                                  //     controller.listSubject[index].uuid;
-                                  // controller.selectedCategoryIndex.value = index;
                                   if (controller.selectedCategoryIndex.value ==
                                       index) {
                                     // إذا كان الخيار المحدد مطابقًا للخيار الحالي، قم بإزالة الاختيار
@@ -190,13 +187,21 @@ class CollageView extends StatelessWidget {
                                                     children: [
                                                       InkWell(
                                                         onTap: () {
-                                                          Get.off(QuestionView(
-                                                              type: 'byspec',
-                                                              kind: kind,
-                                                              questionKind:
-                                                                  'اسئلة الكتاب',
-                                                              speUuid:
-                                                                  speUuid));
+                                                          isOnline
+                                                              ? {
+                                                                  Get.off(QuestionView(
+                                                                      type:
+                                                                          'byspec',
+                                                                      kind:
+                                                                          kind,
+                                                                      questionKind:
+                                                                          'اسئلة الكتاب',
+                                                                      speUuid:
+                                                                          speUuid))
+                                                                }
+                                                              : BotToast.showText(
+                                                                  text:
+                                                                      'انت غير متصل');
                                                         },
                                                         child: CustomBotton(
                                                             text:
@@ -206,13 +211,19 @@ class CollageView extends StatelessWidget {
                                                       ),
                                                       InkWell(
                                                         onTap: () {
-                                                          Get.off(ExamCourcesView(
-                                                              degree: kind ==
-                                                                      'ماستر'
-                                                                  ? 'master'
-                                                                  : 'graduation',
-                                                              speUuid:
-                                                                  speUuid));
+                                                          isOnline
+                                                              ? {
+                                                                  Get.off(ExamCourcesView(
+                                                                      degree: kind ==
+                                                                              'ماستر'
+                                                                          ? 'master'
+                                                                          : 'graduation',
+                                                                      speUuid:
+                                                                          speUuid))
+                                                                }
+                                                              : BotToast.showText(
+                                                                  text:
+                                                                      'انت غير متصل');
                                                         },
                                                         child: CustomBotton(
                                                           text: 'الدورات',
@@ -232,11 +243,16 @@ class CollageView extends StatelessWidget {
                                           width: screenWidth(4))),
                                   InkWell(
                                     onTap: () {
-                                      Get.off(ExamCourcesView(
-                                          degree: kind == 'ماستر'
-                                              ? 'master'
-                                              : 'graduation',
-                                          speUuid: speUuid));
+                                      isOnline
+                                          ? {
+                                              Get.off(ExamCourcesView(
+                                                  degree: kind == 'ماستر'
+                                                      ? 'master'
+                                                      : 'graduation',
+                                                  speUuid: speUuid))
+                                            }
+                                          : BotToast.showText(
+                                              text: 'انت غير متصل');
                                     },
                                     child: CustomBotton(
                                       text: 'الدورات',

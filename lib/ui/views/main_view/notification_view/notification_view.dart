@@ -1,11 +1,9 @@
 import 'package:darrebni_exam/ui/shared/colors.dart';
-import 'package:darrebni_exam/ui/shared/custom_widgets/custom_botton.dart';
 import 'package:darrebni_exam/ui/shared/custom_widgets/custom_text.dart';
 import 'package:darrebni_exam/ui/shared/shared_widgets/title_widget.dart';
 import 'package:darrebni_exam/ui/shared/utils.dart';
 import 'package:darrebni_exam/ui/views/main_view/notification_view/notification_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class NotificationView extends StatelessWidget {

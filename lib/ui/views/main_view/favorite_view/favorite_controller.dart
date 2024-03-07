@@ -8,10 +8,14 @@ import 'package:get/get.dart';
 class FavoriteController extends GetxController {
   @override
   onInit() {
-    if (isOnline)
-      getImportQustion();
-    else
-      BotToast.showText(text: 'انت غير متصل');
+    storege.getFirstLunch()
+        ? null
+        : {
+            if (isOnline)
+              getImportQustion()
+            else
+              BotToast.showText(text: 'انت غير متصل'),
+          };
     super.onInit();
   }
 
